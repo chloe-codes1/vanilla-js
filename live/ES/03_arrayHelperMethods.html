@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Helper Methods</title>
+</head>
+<body>
+
+    <script>
+        /*
+            Callback function 이란?
+            인자로 함수를 넘기고,
+            해당 함수가 
+
+        */
+
+
+
+        // 1. map
+        ['1', '2','3'].map(Number)
+
+        const numbers = [0, 9, 99]
+
+        function addOne(number) {
+            return number + 1
+        }
+        const newNumbers1 = numbers.map(addOne)
+        console.log(newNumbers1)
+
+        const newNumbers2 = numbers.map(function(number) {
+            // [0, 9, 99] 를 순회하며, 각 요소를 (number) 자리에 넣는다.
+            // 그리고 리턴된 값을 새로운 배열에 넣고 마지막에 리턴한다.
+            return number + 1
+        })
+        console.log(newNumbers2)
+
+
+        // 2. forEach
+        //   : return 값이 없다!
+
+        let sum = 0
+        nums = [1,2,3]
+        nums.forEach(function(number){
+            // numbers의 각 요소를 number 자리에 넣고,
+            // 나머지는 알아서 해라! return 없다!
+            sum += number
+        })
+        
+        console.log(nums) //-> 브라우저에서 실행하셈
+
+
+        // 3. filter
+        const odds = [1,2,3].filter(function(number) {
+            // 각 요소를 number 자리에 넣고,
+            // return이 true인 요소들만 모아서 새로운 배열로 return
+            return number %2
+        })
+
+        console.log(odds)
+
+    </script>
+    
+</body>
+</html>
