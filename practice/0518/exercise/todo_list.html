@@ -1,23 +1,37 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   <title>0518 exercise & workshop</title>
 </head>
 <body>
-  <h2>Add New Todo</h2>
-  <p id="addNewTodo">
-  </p>
-  <hr>
+<div class="container mt-5">
+  <div class="form-group">
+    <h2>Add New Todo</h2>
+    <p id="addNewTodo">
+    </p>
+    <hr>
 
-  <h2>Todo List</h2>
-  <ul id="todoList"></ul>
-  <hr>
+    <h2>Todo List</h2>
+    <ul id="todoList"></ul>
+    <hr>
 
-  <h2>Completed Tasks</h2>
-  <ul></ul>
-  <hr>
+    <h2>Completed Tasks</h2>
+    <ul id="completedTasks"></ul>
+    <hr>
+  </div>
+</div>
+  <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
 
   <script>
     // 여기에 코드를 작성하시오.
@@ -26,8 +40,57 @@
       
     };
 
+    const createTodo = function(labelName){
+      // li input label button
+      const newInput = document.createElement('li')
+      const checkBox = document.createElement('input')
+      checkBox.type = 'checkbox'
+
+      const newInputLabel = document.createElement('label')
+      newInputLabel.innerText = labelName
+
+      const editInput =document.createElement('input')
+      editInput.type = 'text'
+
+      const editButton = document.createElement('button')
+      editButton.innerText =' Edit'
+
+      const deleteButton = document.createElement('button')
+      deleteButton.innerText ='Delete'
+
+      deleteButton.addEventListener('click', function(event){
+        newInput.remove()
+      })
+
+
+      editButton.addEventListener('click', function(event){
+        if (editInput.value){
+            newInputLabel.innerText = editInput.value
+            editInput.value = null
+          }
+      })
+
+      checkBox.addEventListener( 'change', function() {
+        
+        
+
+        if(this.checked) {
+          completedTasks.appendChild(newInput)
+          newInputLabel.innerHTML = '<strike>' + newInputLabel.innerText+'</strike>'
+        } else {
+          todoList.appendChild(newInput)
+          newInputLabel.innerHTML = newInputLabel.innerText
+        }
+    });
+
+      newInput.append(checkBox, newInputLabel, editInput, editButton, deleteButton)
+      
+      return newInput
+    }
 
     const newTodo = document.querySelector('#addNewTodo')
+    const todoList = document.querySelector('#todoList')
+    const completedTasks = document.querySelector('#completedTasks')
 
     const newTodoLabel = document.createElement('label')
     newTodoLabel.innerText = 'Add New Todo: '
@@ -43,55 +106,32 @@
     newTodoInput.required = 'true'
     // newTodoInput.setAttribute('required', 'true')
 
-    function addTodo() {
-      const newTodo = document.createElement('li')
-
-      const checkBox = document.createElement('input')
-      checkBox.setAttribute('type','checkbox')
-      
-      const inputText = document.querySelector('#todoInput')
-      const todoText = inputText.value
-      inputText.innerText = ''
-
-      
-      const editInput = document.createElement('input')
-      editInput.setAttribute('type', 'text')
-      editInput.setAttribute('id', 'editInput')
-
-
-      const editButton = document.createElement('button')
-      editButton.setAttribute('onclick', 'editTodo()')
-
-      const deleteButton = document.createElement('button')
-      deleteButton.setAttribute('onclick', 'deleteTodo()')
-
-      newTodo.appendChild(checkBox)
-      newTodo.appendChild(todoText)
-      newTodo.appendChild(editInput)
-      newTodo.appendChild(editButton)
-      newTodo.appendChild(deleteButton)
-    }
-
-    function editTodo(){
-
-    }
-
-    function deleteTodo(){
-
-    }
-
 
     const newTodoButton = document.createElement('button')
     newTodoButton.innerText = 'Add'
-    newTodoButton.setAttribute('onclick', 'addTodo()')
+    newTodoButton.classList.add('btn', 'btn-success')
+    newTodoButton.setAttribute('id', 'newTodoButton')
+    newTodo.append(newTodoLabel, newTodoInput, newTodoButton)
 
-    newTodo.appendChild(newTodoLabel)
-    newTodo.appendChild(newTodoInput)
-    newTodo.appendChild(newTodoButton)
+    newTodoInput.addEventListener("keyup", function(event) {
+      // Number 13 is the "Enter" key on the keyboard
+      if (event.keyCode === 13) {
+        // Cancel the default action, if needed
+        event.preventDefault();
+        // Trigger the button element with a click
+        document.getElementById('newTodoButton').click();
+      }
+    });
 
+    // EventListener 부착
+    newTodoButton.addEventListener('click', function(event){
+      
+      if(newTodoInput.value){
+        todoList.appendChild(createTodo(newTodoInput.value))
+        newTodoInput.value = null
+      }
 
-    const todoList = document.querySelector('#todoList')
-    todoList.appendChild(newTodo)
+    })
 
   </script>
 </body>
