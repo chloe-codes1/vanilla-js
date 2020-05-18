@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vanilla JS Exercise</title>
+</head>
+<body>
+    <h1>Hello JavaScript!</h1>
+    <p>
+        <ul>
+            <li>
+                haha
+            </li>
+            <li id="list" class="my new class here">
+                hoho
+            </li>
+        </ul>
+    </p>
+    <div id="myDiv">
+
+    </div>
+    <script>
+        // querySelector 가 더 유연하다!
+        const liTag = document.querySelector('body > ul > li:nth-child(1)')
+
+        // craetElement
+        const myP = document.createElement('p')
+        myP.innerText = 'Greater'
+        
+        const myPStr = '<p>Great</p>'
+        myPStr.classList // undifined -> string이니까
+        myP.classList.add('wow') // object는 가능
+    </script>
+</body>
+</html>
