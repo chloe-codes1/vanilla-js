@@ -47,7 +47,7 @@
             sum += number
         })
         
-        console.log(nums) //-> 브라우저에서 실행하셈
+        console.log('밍?'+nums)
 
 
         // 3. filter
@@ -58,6 +58,22 @@
         })
 
         console.log(odds)
+
+
+        // 4. find
+        const evens = [1,2,3,4].find(function(number) {
+            // filter()와는 다르게 find()는 함수가 true를 return하면 바로 종료됨
+            return !(number & 1)
+        })
+        console.log('짝수 찾아라~ ', evens)
+
+
+        // 5. every
+        const pass = [50,60,70,80,90].every(function(number){
+            // 모든 원소들이 조건을 통과하면 true, 아니면 false return
+            return number > 40
+        })
+        console.log('통과입니까? ',pass)
 
     </script>
     
