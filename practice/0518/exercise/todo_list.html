@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>0518 exercise & workshop</title>
+</head>
+<body>
+  <h2>Add New Todo</h2>
+  <p id="addNewTodo">
+  </p>
+  <hr>
+
+  <h2>Todo List</h2>
+  <ul id="todoList"></ul>
+  <hr>
+
+  <h2>Completed Tasks</h2>
+  <ul></ul>
+  <hr>
+
+  <script>
+    // 여기에 코드를 작성하시오.
+
+    window.onload = function () {
+      
+    };
+
+
+    const newTodo = document.querySelector('#addNewTodo')
+
+    const newTodoLabel = document.createElement('label')
+    newTodoLabel.innerText = 'Add New Todo: '
+
+    const newTodoInput = document.createElement('input')
+    // [상용 attribute 일 때]
+    // newTodoInput.type = 'text'
+
+    // [사용자 정의 attribute 일 때]
+    newTodoInput.setAttribute('type', 'text')
+    newTodoInput.setAttribute('id', 'todoInput')
+    
+    newTodoInput.required = 'true'
+    // newTodoInput.setAttribute('required', 'true')
+
+    function addTodo() {
+      const newTodo = document.createElement('li')
+
+      const checkBox = document.createElement('input')
+      checkBox.setAttribute('type','checkbox')
+      
+      const inputText = document.querySelector('#todoInput')
+      const todoText = inputText.value
+      inputText.innerText = ''
+
+      
+      const editInput = document.createElement('input')
+      editInput.setAttribute('type', 'text')
+      editInput.setAttribute('id', 'editInput')
+
+
+      const editButton = document.createElement('button')
+      editButton.setAttribute('onclick', 'editTodo()')
+
+      const deleteButton = document.createElement('button')
+      deleteButton.setAttribute('onclick', 'deleteTodo()')
+
+      newTodo.appendChild(checkBox)
+      newTodo.appendChild(todoText)
+      newTodo.appendChild(editInput)
+      newTodo.appendChild(editButton)
+      newTodo.appendChild(deleteButton)
+    }
+
+    function editTodo(){
+
+    }
+
+    function deleteTodo(){
+
+    }
+
+
+    const newTodoButton = document.createElement('button')
+    newTodoButton.innerText = 'Add'
+    newTodoButton.setAttribute('onclick', 'addTodo()')
+
+    newTodo.appendChild(newTodoLabel)
+    newTodo.appendChild(newTodoInput)
+    newTodo.appendChild(newTodoButton)
+
+
+    const todoList = document.querySelector('#todoList')
+    todoList.appendChild(newTodo)
+
+  </script>
+</body>
+</html>
