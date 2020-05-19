@@ -21,6 +21,8 @@
         myButton.addEventListener('click', confirmMessage)
         
         myButton.addEventListener('click', function(event){
+            event.target.classList.add('btn', 'btn-primary')
+            // this.classList ... 를 지양하고 event.target을 지향하자!
             confirm('얍!!')
         })
 
