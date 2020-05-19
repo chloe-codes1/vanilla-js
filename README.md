@@ -6,7 +6,7 @@
 
 ### Learn the state of modern, plain JavaScript!
 
-*VanillaJS is a name to refer to using* **plain JavaScript without any additional libraries** *like jQuery.*
+*VanillaJS is a name to refer to using* plain JavaScript without any `additional libraries` *like jQuery.*
 
 <br>
 
